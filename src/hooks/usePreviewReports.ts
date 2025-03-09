@@ -3,7 +3,7 @@ import { toPng } from "html-to-image";
 import { useEffect, useState } from "react";
 
 export function usePreviewReports(isModalOpen: boolean) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   useEffect(() => {
     if (isModalOpen) handlePreview();

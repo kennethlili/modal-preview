@@ -13,7 +13,7 @@ function PreviewReportFormatSection() {
   return (
     <div>
       <h3>Format</h3>
-      <div className="flex flex-col ml-2">
+      <div className="flex flex-col ml-1">
         <Button variant={"ghost"} disabled className="justify-start">
           PDF Download
         </Button>
@@ -29,9 +29,9 @@ function PreviewReportFormatSection() {
 }
 function PreviewReportOrientationSection() {
   return (
-    <div>
+    <div className="border-t">
       <h3>Orientation</h3>
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-row gap-1 flex-wrap">
         <Button variant={"outline"}>Portrait</Button>
         <Button variant={"outline"} disabled>
           Landscape
@@ -58,15 +58,14 @@ export function PreviewReportModal({
         <DialogHeader>
           <DialogTitle>Print Report</DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-5 gap-4">
-          <div className="col-span-2">
+        <div className="grid grid-cols-5 gap-2">
+          <div className="col-span-2 flex flex-col gap-2">
             <PreviewReportFormatSection />
             <PreviewReportOrientationSection />
           </div>
-          <div className="col-span-3 ">
+          <div className="col-span-3 bg-gray-100 p-3 rounded-lg">
             <div>Preview</div>
-
-            <div className="mt-4 border border-gray-200 p-4 rounded-lg text-center w-[200px] h-[400px]">
+            <div className="mt-4 border p-4 rounded-lg text-center w-[250px] h-[300px]">
               {isLoading ? (
                 <div className="flex items-center justify-center h-32">
                   <Loader className="h-8 w-8 animate-spin text-gray-500" />
