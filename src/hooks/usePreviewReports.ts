@@ -2,7 +2,10 @@ import { REPORT_NODE_ID } from "@/constants";
 import { toPng } from "html-to-image";
 import { useEffect, useState } from "react";
 
-export function usePreviewReports(isModalOpen: boolean) {
+export function usePreviewReports(
+  isModalOpen: boolean,
+  onCloseModal: () => void
+) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   useEffect(() => {
@@ -34,6 +37,7 @@ export function usePreviewReports(isModalOpen: boolean) {
     link.href = previewImage;
     link.download = "report.png";
     link.click();
+    onCloseModal();
   };
   return { isLoading, previewImage, handleDownloadPreviewImage };
 }

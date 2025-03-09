@@ -48,9 +48,10 @@ export function PreviewReportModal({
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const { isLoading, previewImage, handleDownloadPreviewImage } =
-    usePreviewReports(isOpen);
   const onClose = () => onOpenChange(false);
+
+  const { isLoading, previewImage, handleDownloadPreviewImage } =
+    usePreviewReports(isOpen, onClose);
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -58,14 +59,14 @@ export function PreviewReportModal({
         <DialogHeader>
           <DialogTitle>Print Report</DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-5 gap-2">
-          <div className="col-span-2 flex flex-col gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+          <div className="sm:col-span-2 flex flex-col gap-2">
             <PreviewReportFormatSection />
             <PreviewReportOrientationSection />
           </div>
-          <div className="col-span-3 bg-gray-100 p-3 rounded-lg">
+          <div className="sm:col-span-3 bg-gray-100 p-3 rounded-lg sm:mt-0 mt-4">
             <div>Preview</div>
-            <div className="mt-4 border p-4 rounded-lg text-center w-[250px] h-[300px]">
+            <div className="mt-4 border p-4 rounded-lg text-center w-full h-[300px]">
               {isLoading ? (
                 <div className="flex items-center justify-center h-32">
                   <Loader className="h-8 w-8 animate-spin text-gray-500" />
