@@ -1,19 +1,10 @@
-import { useState } from "react";
 import "./App.css";
-import { Button } from "./components/ui/button";
+import ReportPage from "./pages/reportPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <Button
-        variant="default"
-        size="default"
-        onClick={() => setCount((c) => c + 1)}
-      >
-        Clicked {count} times
-      </Button>
+      <ReportPage />
     </>
   );
 }
