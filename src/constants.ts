@@ -1,5 +1,7 @@
 import { ReportItemProps } from "@/components/reports";
 
+export const REPORT_NODE_ID = "report-node";
+
 export const REPORTS: ReportItemProps[] = [
   {
     title: "First Report",

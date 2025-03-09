@@ -2,10 +2,12 @@ import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./ui/dialog";
+import { Loader } from "lucide-react"; // Import a spinner icon from lucide-react
+import { usePreviewReports } from "@/hooks/usePreviewReports";
 
 function PreviewReportFormatSection() {
   return (
@@ -39,28 +41,56 @@ function PreviewReportOrientationSection() {
   );
 }
 
-export function PreviewReportModal() {
+export function PreviewReportModal({
+  isOpen,
+  onOpenChange,
+}: {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const { isLoading, previewImage, handleDownloadPreviewImage } =
+    usePreviewReports(isOpen);
+  const onClose = () => onOpenChange(false);
+
   return (
-    <>
-      <Dialog>
-        <DialogTrigger>
-          <Button>Preview Report</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Print Report</DialogTitle>
-          </DialogHeader>
-          <div className="grid grid-cols-5 gap-4">
-            <div className="col-span-2">
-              <PreviewReportFormatSection />
-              <PreviewReportOrientationSection />
-            </div>
-            <div className="col-span-3">
-              <div>Preview</div>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Print Report</DialogTitle>
+        </DialogHeader>
+        <div className="grid grid-cols-5 gap-4">
+          <div className="col-span-2">
+            <PreviewReportFormatSection />
+            <PreviewReportOrientationSection />
+          </div>
+          <div className="col-span-3 ">
+            <div>Preview</div>
+
+            <div className="mt-4 border border-gray-200 p-4 rounded-lg text-center w-[200px] h-[400px]">
+              {isLoading ? (
+                <div className="flex items-center justify-center h-32">
+                  <Loader className="h-8 w-8 animate-spin text-gray-500" />
+                </div>
+              ) : previewImage ? (
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  className="w-full h-full rounded-lg"
+                />
+              ) : (
+                <div className="text-red-600">Error on Preview Report</div>
+              )}
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
-    </>
+        </div>
+
+        <DialogFooter>
+          <Button variant={"ghost"} onClick={onClose}>
+            Cancel
+          </Button>
+          <Button onClick={handleDownloadPreviewImage}>Print Report</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -1,3 +1,4 @@
+import { REPORT_NODE_ID } from "@/constants";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 
 export type ReportItemProps = {
@@ -20,7 +21,7 @@ function ReportItem({ title, content }: ReportItemProps) {
 
 export function Reports({ reports }: { reports: ReportItemProps[] }) {
   return (
-    <div className="grid grid-cols-2 w-full gap-2">
+    <div className="grid grid-cols-2 w-full gap-2" id={REPORT_NODE_ID}>
       {reports.map((report, i) => (
         <ReportItem key={i} {...report} />
       ))}
