@@ -55,7 +55,7 @@ export function PreviewReportModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="sm:w-full sm:max-w-[50vw] ">
         <DialogHeader>
           <DialogTitle>Print Report</DialogTitle>
         </DialogHeader>
