@@ -34,7 +34,7 @@ export function PreviewReportModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:w-full sm:max-w-[50vw] ">
+      <DialogContent className="sm:w-full sm:max-w-[50vw] overflow-y-scroll max-h-screen">
         <DialogHeader className="pb-2 ">
           <div className="flex flex-row gap-1 items-center">
             <Printer className="h-5 w-5" />
