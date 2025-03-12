@@ -1,12 +1,13 @@
 import { Button } from "./ui/button";
 import {
   Dialog,
+  DialogBody,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
-import { Loader } from "lucide-react"; // Import a spinner icon from lucide-react
+import { Loader, Printer } from "lucide-react";
 import { usePreviewReports } from "@/hooks/usePreviewReports";
 
 function PreviewReportFormatSection() {
@@ -56,10 +57,14 @@ export function PreviewReportModal({
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:w-full sm:max-w-[50vw] ">
-        <DialogHeader>
-          <DialogTitle>Print Report</DialogTitle>
+        <DialogHeader className="pb-2 ">
+          <div className="flex flex-row gap-1 items-center">
+            <Printer className="h-5 w-5" />
+
+            <DialogTitle>Print Report</DialogTitle>
+          </div>
         </DialogHeader>
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+        <DialogBody className="grid grid-cols-1 sm:grid-cols-5 gap-2">
           <div className="sm:col-span-2 flex flex-col gap-2">
             <PreviewReportFormatSection />
             <PreviewReportOrientationSection />
@@ -82,7 +87,7 @@ export function PreviewReportModal({
               )}
             </div>
           </div>
-        </div>
+        </DialogBody>
 
         <DialogFooter>
           <Button variant={"ghost"} onClick={onClose}>
