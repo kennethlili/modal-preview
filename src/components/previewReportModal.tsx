@@ -152,7 +152,7 @@ export function PreviewReportModal({
         </DialogBody>
 
         <DialogFooter>
-          <Button variant={"ghost"} onClick={onClose}>
+          <Button variant={"outline"} onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleDownloadPreviewImage}>Print Report</Button>
