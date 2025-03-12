@@ -1,4 +1,8 @@
-import { REPORT_NODE_ID } from "@/constants";
+import {
+  REPORT_FORMATS,
+  REPORT_NODE_ID,
+  REPORT_ORIENTATIONS,
+} from "@/constants";
 import { toPng } from "html-to-image";
 import { useEffect, useState } from "react";
 
@@ -7,6 +11,9 @@ export function usePreviewReports(
   onCloseModal: () => void
 ) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [format, setFormat] = useState<keyof typeof REPORT_FORMATS>("PNG");
+  const [orientation, setOrientation] =
+    useState<keyof typeof REPORT_ORIENTATIONS>("PORTRAIT");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   useEffect(() => {
     if (isModalOpen) handlePreview();
@@ -39,5 +46,14 @@ export function usePreviewReports(
     link.click();
     onCloseModal();
   };
-  return { isLoading, previewImage, handleDownloadPreviewImage };
+  return {
+    isLoading,
+    previewImage,
+    handleDownloadPreviewImage,
+    // state for format and orientation
+    format,
+    setFormat,
+    orientation,
+    setOrientation,
+  };
 }
