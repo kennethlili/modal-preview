@@ -120,21 +120,20 @@ export function PreviewReportModal({
         <DialogHeader className="pb-2 ">
           <div className="flex flex-row gap-1 items-center">
             <Printer className="h-5 w-5" />
-
             <DialogTitle>Print Report</DialogTitle>
           </div>
         </DialogHeader>
         <DialogBody className="grid grid-cols-1 sm:grid-cols-5">
-          <div className="sm:col-span-2 flex flex-col gap-2 px-1">
+          <div className="sm:col-span-2 flex flex-col gap-2 px-1 pt-3">
             <PreviewReportFormatSection format={format} setFormat={setFormat} />
             <PreviewReportOrientationSection
               orientation={orientation}
               setOrientation={setOrientation}
             />
           </div>
-          <div className="sm:col-span-3 bg-gray-100 p-3 rounded-lg sm:mt-0 mt-4">
-            <div>Preview</div>
-            <div className="mt-4 border p-4 rounded-lg text-center w-full h-[300px]">
+          <div className="sm:col-span-3 bg-gray-100 p-3 sm:mt-0 mt-4 ">
+            <h3 className="mb-2">Preview</h3>
+            <div className="border p-4 rounded-sm text-center w-full h-[300px] bg-white shadow-md">
               {isLoading ? (
                 <div className="flex items-center justify-center h-32">
                   <Loader className="h-8 w-8 animate-spin text-gray-500" />
