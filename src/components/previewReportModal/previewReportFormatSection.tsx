@@ -1,5 +1,6 @@
 import { REPORT_FORMATS } from "@/constants";
-import { Button } from "../ui/button";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
+import { FileText, Image, FileSpreadsheet } from "lucide-react";
 
 const getReportFormatBtnText = (format: keyof typeof REPORT_FORMATS) => {
   switch (format) {
@@ -17,6 +18,21 @@ const getReportFormatBtnText = (format: keyof typeof REPORT_FORMATS) => {
   }
 };
 
+const getReportFormatBtnIcon = (format: keyof typeof REPORT_FORMATS) => {
+  switch (format) {
+    case "PDF":
+      return <FileText />;
+    case "PNG":
+      return <Image />;
+    case "CSV":
+      return <FileSpreadsheet />;
+    default: {
+      const _exhaustiveCheck: never = format;
+      return _exhaustiveCheck;
+    }
+  }
+};
+
 export function PreviewReportFormatSection({
   format,
   setFormat,
@@ -27,18 +43,25 @@ export function PreviewReportFormatSection({
   return (
     <div className="px-6">
       <h3 className="mb-2">Format</h3>
-      <div className="flex flex-col ml-1">
+      <ToggleGroup
+        type="single"
+        size="lg"
+        value={format}
+        onValueChange={(value) =>
+          setFormat(value as keyof typeof REPORT_FORMATS)
+        }
+        className="flex flex-col ml-1 items-start"
+      >
         {Object.values(REPORT_FORMATS).map((fmt) => (
-          <Button
+          <ToggleGroupItem
             key={fmt}
-            variant={"ghost"}
-            className={`justify-start ${format === fmt ? "border" : ""}`}
-            onClick={() => setFormat(fmt)}
+            value={fmt}
+            className="w-full justify-start"
           >
-            {getReportFormatBtnText(fmt)}
-          </Button>
+            {getReportFormatBtnIcon(fmt)} {getReportFormatBtnText(fmt)}
+          </ToggleGroupItem>
         ))}
-      </div>
+      </ToggleGroup>
     </div>
   );
 }

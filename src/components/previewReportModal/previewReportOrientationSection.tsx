@@ -1,5 +1,5 @@
 import { REPORT_ORIENTATIONS } from "@/constants";
-import { Button } from "../ui/button";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 
 const getReportOrientationBtnText = (ori: keyof typeof REPORT_ORIENTATIONS) => {
   switch (ori) {
@@ -25,20 +25,21 @@ export function PreviewReportOrientationSection({
   return (
     <div className="border-t px-6 pt-2">
       <h3 className="mb-2">Orientation</h3>
-      <div className="flex flex-row ml-1">
-        {Object.values(REPORT_ORIENTATIONS).map((ori) => (
-          <Button
-            key={ori}
-            variant={"ghost"}
-            className={`justify-start w-fit ${
-              orientation === ori ? "border" : ""
-            }`}
-            onClick={() => setOrientation(ori)}
-          >
-            {getReportOrientationBtnText(ori)}
-          </Button>
+      <ToggleGroup
+        type="single"
+        size="lg"
+        value={orientation}
+        onValueChange={(value) =>
+          setOrientation(value as keyof typeof REPORT_ORIENTATIONS)
+        }
+        className="flex flex-row ml-1 items-start"
+      >
+        {Object.values(REPORT_ORIENTATIONS).map((fmt) => (
+          <ToggleGroupItem key={fmt} value={fmt} className="justify-start">
+            {getReportOrientationBtnText(fmt)}
+          </ToggleGroupItem>
         ))}
-      </div>
+      </ToggleGroup>
     </div>
   );
 }
