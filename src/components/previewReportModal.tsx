@@ -35,8 +35,8 @@ function PreviewReportFormatSection({
   setFormat: (format: keyof typeof REPORT_FORMATS) => void;
 }) {
   return (
-    <div>
-      <h3>Format</h3>
+    <div className="px-6">
+      <h3 className="mb-2">Format</h3>
       <div className="flex flex-col ml-1">
         {Object.values(REPORT_FORMATS).map((fmt) => (
           <Button
@@ -75,14 +75,16 @@ function PreviewReportOrientationSection({
   setOrientation: (orientation: keyof typeof REPORT_ORIENTATIONS) => void;
 }) {
   return (
-    <div className="border-t">
-      <h3>Orientation</h3>
-      <div className="flex flex-col ml-1">
+    <div className="border-t px-6 pt-2">
+      <h3 className="mb-2">Orientation</h3>
+      <div className="flex flex-row ml-1">
         {Object.values(REPORT_ORIENTATIONS).map((ori) => (
           <Button
             key={ori}
             variant={"ghost"}
-            className={`justify-start ${orientation === ori ? "border" : ""}`}
+            className={`justify-start w-fit ${
+              orientation === ori ? "border" : ""
+            }`}
             onClick={() => setOrientation(ori)}
           >
             {getReportOrientationBtnText(ori)}
@@ -122,8 +124,8 @@ export function PreviewReportModal({
             <DialogTitle>Print Report</DialogTitle>
           </div>
         </DialogHeader>
-        <DialogBody className="grid grid-cols-1 sm:grid-cols-5 gap-2">
-          <div className="sm:col-span-2 flex flex-col gap-2">
+        <DialogBody className="grid grid-cols-1 sm:grid-cols-5">
+          <div className="sm:col-span-2 flex flex-col gap-2 px-1">
             <PreviewReportFormatSection format={format} setFormat={setFormat} />
             <PreviewReportOrientationSection
               orientation={orientation}
